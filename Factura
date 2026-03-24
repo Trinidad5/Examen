@@ -1,0 +1,151 @@
+package factura;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+
+public class VentanaFactura extends JFrame {
+
+    public VentanaFactura() {
+        setTitle("Factura en Java - NetBeans - ArrayList y POO");
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+
+        crearInterfaz();
+
+        setVisible(true);
+    }
+
+    public void crearInterfaz() {
+
+        // lo superior
+        JPanel header = new JPanel();
+        header.setBounds(0, 0, 800, 60);
+        header.setBackground(Color.decode("#156082"));
+        header.setLayout(null);
+
+        JLabel titulo = new JLabel("Factura en Java - NetBeans - ArrayList y POO");
+        titulo.setForeground(Color.WHITE);
+        titulo.setBounds(20, 10, 500, 20);
+
+        JLabel subtitulo = new JLabel("[Sin Base de datos]");
+        subtitulo.setForeground(Color.WHITE);
+        subtitulo.setBounds(20, 30, 200, 20);
+
+        header.add(titulo);
+        header.add(subtitulo);
+        add(header);
+
+        // dato clien
+        JPanel cliente = new JPanel();
+        cliente.setLayout(null);
+        cliente.setBorder(new TitledBorder("Datos del cliente"));
+        cliente.setBounds(20, 70, 740, 100);
+
+        cliente.add(label("Documento:", 20, 20));
+        cliente.add(textField(120, 20));
+
+        cliente.add(label("Nombres:", 380, 20));
+        cliente.add(textField(480, 20));
+
+        cliente.add(label("Dirección:", 20, 60));
+        cliente.add(textField(120, 60));
+
+        cliente.add(label("Teléfono:", 380, 60));
+        cliente.add(textField(480, 60));
+
+        add(cliente);
+
+        // factu
+        JPanel factura = new JPanel();
+        factura.setLayout(null);
+        factura.setBorder(new TitledBorder("Datos de factura"));
+        factura.setBounds(20, 180, 740, 60);
+
+        factura.add(label("N° Factura:", 20, 20));
+        factura.add(label("1", 120, 20));
+
+        factura.add(label("Fecha:", 400, 20));
+        factura.add(label("2021/50/21", 460, 20));
+
+        add(factura);
+
+        // botone list
+        JButton verListado = new JButton("Ver listado de facturas");
+        verListado.setBounds(20, 250, 200, 30);
+        add(verListado);
+
+        JButton añadir = new JButton("Añadir");
+        añadir.setBounds(580, 250, 80, 30);
+        add(añadir);
+
+        JButton eliminar = new JButton("Eliminar");
+        eliminar.setBounds(670, 250, 90, 30);
+        add(eliminar);
+
+        // tabla
+        String[] columnas = {"Producto", "Cantidad", "Valor", "Sub Total"};
+
+        String[][] datos = {
+                {"Agua", "2", "500", "1000.0"},
+                {"Cereal", "5", "1000", "5000.0"},
+                {"Leche", "2", "300", "600.0"}
+        };
+
+        JTable tabla = new JTable(datos, columnas);
+        JScrollPane scroll = new JScrollPane(tabla);
+        scroll.setBounds(20, 290, 740, 120);
+
+        add(scroll);
+
+        // ultimo
+        add(label("SubTotal:", 20, 430));
+        add(label("6600.0", 100, 430));
+
+        add(label("% Descuento:", 20, 460));
+        JTextField descuento = new JTextField("5");
+        descuento.setBounds(120, 460, 50, 25);
+        add(descuento);
+
+        JCheckBox check = new JCheckBox();
+        check.setBounds(180, 460, 20, 20);
+        add(check);
+
+        add(label("Valor descontado:", 220, 460));
+        add(label("330.0", 360, 460));
+
+        add(label("IVA 19%:", 20, 490));
+        add(label("1254.0", 100, 490));
+
+        add(label("Total Factura:", 20, 520));
+        add(label("7524.0", 120, 520));
+
+        // finalizar,limpiar.
+        JButton finalizar = new JButton("Finalizar factura");
+        finalizar.setBounds(450, 500, 150, 30);
+        add(finalizar);
+
+        JButton limpiar = new JButton("Limpiar");
+        limpiar.setBounds(620, 500, 100, 30);
+        add(limpiar);
+    }
+
+    // 
+    private JLabel label(String texto, int x, int y) {
+        JLabel lbl = new JLabel(texto);
+        lbl.setBounds(x, y, 150, 25);
+        return lbl;
+    }
+
+    private JTextField textField(int x, int y) {
+        JTextField txt = new JTextField();
+        txt.setBounds(x, y, 200, 25);
+        return txt;
+    }
+
+    public static void main(String[] args) {
+        new VentanaFactura();
+    }
+}
